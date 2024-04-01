@@ -1,4 +1,5 @@
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   Text,
@@ -14,9 +15,80 @@ import {
   PhotoIcon,
 } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebase";
+import { setDoc, doc } from "firebase/firestore";
 
 export default function RegisterScreen() {
   const navigation = useNavigation();
+  // states
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [profileURL, setProfileURL] = useState("");
+
+  const register = async () => {
+    if (
+      email === "" ||
+      password === "" ||
+      profileURL === "" ||
+      username === ""
+    ) {
+      Alert.alert("Invalid Details", "Please fill all the details properly.", [
+        {
+          text: "OK",
+          style: "default",
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ]);
+    } else {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then(async (userCredential) => {
+          const user = userCredential.user;
+          if (user) {
+            const docRef = doc(db, "users", `${user.uid}`);
+            await setDoc(docRef, {
+              email: email,
+              username: username,
+              profileURL: profileURL,
+              password: `${password} + 12098s`,
+            });
+            Alert.alert(
+              "Registration Success",
+              "Your account has been created",
+              [
+                {
+                  text: "OK",
+                  style: "default",
+                },
+                {
+                  text: "Cancel",
+                  style: "cancel",
+                },
+              ]
+            );
+            navigation.replace("Login");
+          }
+        })
+        .catch((error) => {
+          Alert.alert("Error", error?.message, [
+            {
+              text: "OK",
+              style: "default",
+            },
+            {
+              text: "Cancel",
+              style: "cancel",
+            },
+          ]);
+        });
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -49,7 +121,7 @@ export default function RegisterScreen() {
               placeholder="Usernames"
               autoCapitalize="none"
               autoCorrect={false}
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={(text) => setUsername(text)}
             />
           </View>
           {/* Email */}
@@ -89,7 +161,7 @@ export default function RegisterScreen() {
               placeholder="Profile URL"
               autoCapitalize="none"
               autoCorrect={false}
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={(text) => setProfileURL(text)}
             />
           </View>
 
@@ -111,10 +183,12 @@ export default function RegisterScreen() {
               secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={(text) => setPassword(text)}
             />
           </View>
+          {/* Regsiter Button */}
           <TouchableOpacity
+            onPress={register}
             style={{
               backgroundColor: theme.primary,
               padding: 20,
@@ -128,7 +202,7 @@ export default function RegisterScreen() {
                 fontWeight: "bold",
               }}
             >
-              Login
+              Register Now
             </Text>
           </TouchableOpacity>
           {/* Signup  */}
