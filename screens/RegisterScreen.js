@@ -46,7 +46,7 @@ export default function RegisterScreen() {
         },
       ]);
     } else {
-      await createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
           const user = userCredential.user;
           if (user) {
@@ -56,6 +56,7 @@ export default function RegisterScreen() {
               username: username,
               profileURL: profileURL,
               password: `${password} + 12098s`,
+              userId: user?.uid,
             });
             Alert.alert(
               "Registration Success",
