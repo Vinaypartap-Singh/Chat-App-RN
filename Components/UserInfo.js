@@ -4,12 +4,16 @@ import { ChevronRightIcon } from "react-native-heroicons/outline";
 import theme from "../theme";
 import { useNavigation } from "@react-navigation/native";
 
-export default function UserInfo({ users }) {
+export default function UserInfo({ user }) {
   const navigation = useNavigation();
   return (
     <View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Messages")}
+        onPress={() =>
+          navigation.navigate("Messages", {
+            user,
+          })
+        }
         style={{
           marginTop: 20,
           borderBottomWidth: 1,
@@ -23,7 +27,7 @@ export default function UserInfo({ users }) {
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
           <Image
             source={{
-              uri: users?.profileURL,
+              uri: user?.profileURL,
             }}
             style={{
               height: 70,
@@ -34,7 +38,7 @@ export default function UserInfo({ users }) {
           />
           <View>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-              {users?.username}
+              {user?.username}
             </Text>
             <Text style={{ color: theme.iconColor, marginTop: 10 }}>
               Messages

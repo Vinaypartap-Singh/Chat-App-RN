@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
-import MessageDetails from "./screens/MessageDetails";
+import ChatRoom from "./screens/MessageDetails";
 
 export default function Navigaion() {
   const Stack = createNativeStackNavigator();
@@ -27,7 +27,7 @@ export default function Navigaion() {
         />
         <Stack.Screen
           name="Messages"
-          component={MessageDetails}
+          component={ChatRoom}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

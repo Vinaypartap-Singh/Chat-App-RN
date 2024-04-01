@@ -35,7 +35,7 @@ export default function ListUsers() {
       {users ? (
         <View>
           {users?.map((data, index) => {
-            return <UserInfo key={index} users={data} />;
+            return <UserInfo key={index} user={data} />;
           })}
         </View>
       ) : (
