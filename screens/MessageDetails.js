@@ -88,8 +88,6 @@ export default function ChatRoom({ route }) {
     }
   };
 
-  console.log(messages);
-
   return (
     <View
       style={{
@@ -100,7 +98,7 @@ export default function ChatRoom({ route }) {
     >
       <View>
         <ChatRoomHeader user={data} />
-        <MessageList />
+        <MessageList messages={messages} />
       </View>
 
       <View
