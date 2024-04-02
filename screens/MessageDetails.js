@@ -14,16 +14,41 @@ import theme from "../theme";
 import { PaperAirplaneIcon } from "react-native-heroicons/outline";
 import { auth, db } from "../firebase";
 import { getRoomID } from "../utils/common";
-import { addDoc, doc, Timestamp, collection } from "firebase/firestore";
+import {
+  addDoc,
+  doc,
+  Timestamp,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 
 export default function ChatRoom({ route }) {
   const data = route.params;
   const currentUser = auth.currentUser.uid;
   // console.log(data.user.userId, "-", currentUser)
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     createRoomOrIfNotExists();
+
+    const roomId = getRoomID(data?.user?.userId, auth?.currentUser?.uid);
+    const docRef = doc(db, "rooms", roomId);
+    const messageRef = collection(docRef, "messages");
+    const q = query(messageRef, orderBy("createdAt", "asc"));
+
+    const unsub = onSnapshot(q, (snaphot) => {
+      let allMessages = snaphot.docs.map((doc) => {
+        return doc.data();
+      });
+
+      setMessages([...allMessages]);
+    });
+
+    return unsub;
   }, []);
 
   const createRoomOrIfNotExists = async () => {
@@ -55,6 +80,7 @@ export default function ChatRoom({ route }) {
         userId: currentUser,
         text: message,
         userInfo: data?.user,
+        createdAt: Timestamp.fromDate(new Date()),
       });
 
       console.log(newDoc.id);
@@ -62,7 +88,7 @@ export default function ChatRoom({ route }) {
     }
   };
 
-  console.log(message);
+  console.log(messages);
 
   return (
     <View
