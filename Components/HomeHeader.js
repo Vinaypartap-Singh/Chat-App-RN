@@ -104,7 +104,7 @@ export default function HomeHeader() {
               >
                 VMChat
               </Text>
-              <Text style={{ marginTop: 5 }}>
+              <Text style={{ marginTop: 5, fontWeight: "bold" }}>
                 Welcome: {userInfo?.username}
               </Text>
             </View>
@@ -113,8 +113,8 @@ export default function HomeHeader() {
                 alt="Profie Image"
                 source={{ uri: userInfo?.profileURL }}
                 style={{
-                  width: 70,
-                  height: 70,
+                  width: 60,
+                  height: 60,
                   borderRadius: 100,
                   objectFit: "cover",
                 }}

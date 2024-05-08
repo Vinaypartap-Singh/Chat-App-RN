@@ -57,6 +57,7 @@ export default function RegisterScreen() {
               profileURL: profileURL,
               password: `${password} + 12098s`,
               userId: user?.uid,
+              status: "online",
             });
             Alert.alert(
               "Registration Success",
