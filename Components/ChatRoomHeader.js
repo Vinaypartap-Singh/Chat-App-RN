@@ -9,7 +9,7 @@ import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 export default function ChatRoomHeader({ user }) {
   const currentUserUid = auth?.currentUser?.uid;
   const currentDate = new Date();
-  console.log(currentDate);
+
   const userOnline =
     user?.user?.status.toDate().toLocaleTimeString() === currentDate;
   useEffect(() => {

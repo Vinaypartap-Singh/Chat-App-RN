@@ -16,7 +16,7 @@ export default function ListUsers() {
 
       const getUsers = onSnapshot(queryRef, (snapshot) => {
         const allUsers = [];
-        console.log(snapshot);
+
         snapshot.forEach((doc) => {
           allUsers.push({
             id: doc.id,

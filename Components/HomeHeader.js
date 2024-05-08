@@ -59,25 +59,6 @@ export default function HomeHeader() {
     }
   }, []);
 
-  const logOut = async () => {
-    await signOut(auth)
-      .then(() => {
-        navigation.replace("Login");
-      })
-      .catch((error) => {
-        Alert.alert("Error", error?.message, [
-          {
-            text: "OK",
-            style: "default",
-          },
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-        ]);
-      });
-  };
-
   return (
     <View style={{ backgroundColor: "white" }}>
       {loading ? (

@@ -28,6 +28,7 @@ import {
 export default function ChatRoom({ route }) {
   const data = route.params;
   const currentUser = auth.currentUser.uid;
+  // Room ID
   // console.log(data.user.userId, "-", currentUser)
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -83,7 +84,6 @@ export default function ChatRoom({ route }) {
         createdAt: Timestamp.fromDate(new Date()),
       });
 
-      console.log(newDoc.id);
       setMessage("");
     }
   };

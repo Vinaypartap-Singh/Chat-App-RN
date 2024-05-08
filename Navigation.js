@@ -5,9 +5,11 @@ import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import ChatRoom from "./screens/MessageDetails";
 import ProfileScreen from "./screens/ProfileScreen";
+import UpdateProfile from "./screens/UpdateProfile";
 
 export default function Navigaion() {
   const Stack = createNativeStackNavigator();
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
