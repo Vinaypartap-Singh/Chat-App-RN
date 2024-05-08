@@ -108,13 +108,15 @@ export default function HomeHeader() {
                 Welcome: {userInfo?.username}
               </Text>
             </View>
-            <TouchableOpacity onPress={logOut}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("UserProfile")}
+            >
               <Image
                 alt="Profie Image"
                 source={{ uri: userInfo?.profileURL }}
                 style={{
-                  width: 60,
-                  height: 60,
+                  width: 40,
+                  height: 40,
                   borderRadius: 100,
                   objectFit: "cover",
                 }}

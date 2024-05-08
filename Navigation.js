@@ -4,6 +4,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import ChatRoom from "./screens/MessageDetails";
+import ProfileScreen from "./screens/ProfileScreen";
 
 export default function Navigaion() {
   const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ export default function Navigaion() {
           component={ChatRoom}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="UserProfile" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
