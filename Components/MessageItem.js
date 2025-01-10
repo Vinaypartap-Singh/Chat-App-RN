@@ -9,7 +9,7 @@ export default function MessageItem({ data, currentUser }) {
           padding: 10,
           backgroundColor: theme.text,
           margin: 10,
-          alignSelf: "flex-start",
+          alignSelf: "flex-end",
           borderRadius: 10,
         }}
       >
@@ -23,7 +23,7 @@ export default function MessageItem({ data, currentUser }) {
           padding: 10,
           backgroundColor: theme.text,
           margin: 10,
-          alignSelf: "flex-end",
+          alignSelf: "flex-start",
           borderRadius: 10,
         }}
       >

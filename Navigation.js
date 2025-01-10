@@ -7,7 +7,7 @@ import ChatRoom from "./screens/MessageDetails";
 import ProfileScreen from "./screens/ProfileScreen";
 import UpdateProfile from "./screens/UpdateProfile";
 
-export default function Navigaion() {
+export default function Navigation() {
   const Stack = createNativeStackNavigator();
 
   return (
