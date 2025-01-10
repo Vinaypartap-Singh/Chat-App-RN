@@ -41,7 +41,7 @@ export default function UserInfo({ user }) {
               {user?.username}
             </Text>
             <Text style={{ color: theme.iconColor, marginTop: 10 }}>
-              Messages
+              Message
             </Text>
           </View>
         </View>

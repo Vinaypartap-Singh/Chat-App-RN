@@ -1,17 +1,22 @@
-import { View, Text, ScrollView } from "react-native";
 import React from "react";
+import { FlatList } from "react-native";
 import { auth } from "../firebase";
 import MessageItem from "./MessageItem";
 
 export default function MessageList({ messages }) {
   const currentUser = auth?.currentUser.uid;
+
+  const renderItem = ({ item }) => (
+    <MessageItem data={item} currentUser={currentUser} />
+  );
+
   return (
-    <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-      {messages.map((data, index) => {
-        return (
-          <MessageItem data={data} currentUser={currentUser} key={index} />
-        );
-      })}
-    </ScrollView>
+    <FlatList
+      data={messages}
+      keyExtractor={(item, index) => index.toString()} // Use a unique key for each item
+      renderItem={renderItem}
+      showsVerticalScrollIndicator={false}
+      bounces={false}
+    />
   );
 }

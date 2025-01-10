@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
+import { signOut } from "firebase/auth";
+import React from "react";
+import { View } from "react-native";
 import HomeHeader from "../Components/HomeHeader";
 import ListUsers from "../Components/ListUsers";
+import { auth } from "../firebase";
 
 export default function HomeScreen() {
   const navigation = useNavigation();

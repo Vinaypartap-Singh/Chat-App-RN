@@ -1,17 +1,16 @@
-import {
-  View,
-  Text,
-  Alert,
-  ActivityIndicator,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { auth, db } from "../firebase";
-import { getDoc, doc } from "firebase/firestore";
-import theme from "../theme";
-import { signOut } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { auth, db } from "../firebase";
+import theme from "../theme";
 
 export default function HomeHeader() {
   const navigation = useNavigation();
@@ -60,12 +59,16 @@ export default function HomeHeader() {
   }, []);
 
   return (
-    <View style={{ backgroundColor: "white" }}>
+    <View>
       {loading ? (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <ActivityIndicator size={"large"} color={theme.primary} />
+          <ActivityIndicator size={"small"} color={theme.primary} />
         </View>
       ) : (
         <View>
