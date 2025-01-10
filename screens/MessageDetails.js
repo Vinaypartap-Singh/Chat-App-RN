@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import ChatRoomHeader from "../Components/ChatRoomHeader";
@@ -88,12 +89,19 @@ export default function ChatRoom({ route }) {
     }
   };
 
+  // Determine dynamic marginTop for Android
+  const dynamicMarginTop =
+    Platform.OS === "android" ? StatusBar.currentHeight || 40 : 0;
+  const paddingTop = Platform.OS === "android" ? 20 : 0;
+
   return (
     <View
       style={{
         flexDirection: "column",
         justifyContent: "space-between",
         height: "100%",
+        marginTop: dynamicMarginTop,
+        paddingTop: paddingTop,
       }}
     >
       <View>
